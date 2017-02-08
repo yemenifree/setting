@@ -30,9 +30,7 @@ class SettingTest extends TestCase
 
         setting()->set('key', 'updated');
 
-        $this->seeInDatabase('settings', [
-            'key'   => 'key',
-        ]);
+        $this->assertEquals('updated', setting('key'));
     }
 
     public function test_get()
@@ -161,7 +159,7 @@ class SettingTest extends TestCase
         // Retrieve the value once to cache it.
         setting()->get('key');
 
-        setting()->model()->whereKey('key')->delete();
+        setting()->model()->where(['key' => 'key'])->delete();
 
         // Test that the value is cached when the model doesn't exist.
         $this->assertEquals('value', setting()->get('key'));

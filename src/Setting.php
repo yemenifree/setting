@@ -106,7 +106,11 @@ class Setting implements SettingContract
     public function find($key)
     {
         return $this->cache($key, function () use ($key) {
+<<<<<<< HEAD
             return $this->model()->where('key',$key)->first();
+=======
+            return $this->model()->where('key', $key)->first();
+>>>>>>> larapacks/master
         });
     }
 
